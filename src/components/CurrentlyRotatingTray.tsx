@@ -162,20 +162,27 @@ export const CurrentlyRotatingTray: React.FC = () => {
                     {/* Media Artwork Cover with fallback */}
                     <div
                       onClick={() => setSelectedMediaModal(item)}
-                      className="relative w-20 h-28 sm:w-24 sm:h-32 rounded-xl overflow-hidden bg-neutral-950 border border-neutral-800 shrink-0 cursor-pointer shadow-md group-hover:scale-[1.02] transition-transform"
+                      className="relative w-20 h-28 sm:w-24 sm:h-32 rounded-xl overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-950 border border-neutral-800 shrink-0 cursor-pointer shadow-md group-hover:scale-[1.02] transition-transform flex items-center justify-center"
                     >
+                      {/* Underlying styled fallback */}
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-2 text-center select-none">
+                        <MediaIcon type={item.type} className="w-6 h-6 text-amber-400/80 mb-1" />
+                        <span className="text-[9px] text-neutral-400 font-medium line-clamp-2 leading-tight">
+                          {item.title}
+                        </span>
+                      </div>
+
                       <img
                         src={item.coverImage}
                         alt={item.title}
-                        className="w-full h-full object-cover"
+                        className="absolute inset-0 w-full h-full object-cover"
                         referrerPolicy="no-referrer"
                         onError={(e) => {
-                          // Stylized fallback
                           e.currentTarget.style.display = 'none';
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-transparent pointer-events-none" />
-                      <div className="absolute bottom-1.5 left-1.5 right-1.5 flex items-center justify-between text-[10px] text-white/90 font-mono tabular-nums">
+                      <div className="absolute bottom-1.5 left-1.5 right-1.5 flex items-center justify-between text-[10px] text-white/90 font-mono tabular-nums z-10">
                         <span>{pct}%</span>
                       </div>
                     </div>

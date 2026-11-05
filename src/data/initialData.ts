@@ -1,4 +1,23 @@
 import { MediaItem, SocialActivity, FriendProfile, MediaGoal, CuratedShelf } from '../types/media';
+import bookCover from '../assets/images/book_cover_tomorrow_1793913134412.jpg';
+import movieCover from '../assets/images/movie_poster_scifi_1793913134968.jpg';
+import albumCover from '../assets/images/album_art_vinyl_1793913135801.jpg';
+import gameCover from '../assets/images/game_cover_cyberpunk_1793913136041.jpg';
+
+export const LOCAL_IMAGE_MAP: Record<string, string> = {
+  'The Waves Between Us': bookCover,
+  'Eclipse of the Twin Moons': movieCover,
+  'Sonic Fluidity': albumCover,
+  'Neon Edge: Forge Your Destiny': gameCover,
+  '/src/assets/images/book_cover_tomorrow_1793913134412.jpg': bookCover,
+  '/src/assets/images/movie_poster_scifi_1793913134968.jpg': movieCover,
+  '/src/assets/images/album_art_vinyl_1793913135801.jpg': albumCover,
+  '/src/assets/images/game_cover_cyberpunk_1793913136041.jpg': gameCover,
+  '/assets/images/book_cover_tomorrow_1793913134412.jpg': bookCover,
+  '/assets/images/movie_poster_scifi_1793913134968.jpg': movieCover,
+  '/assets/images/album_art_vinyl_1793913135801.jpg': albumCover,
+  '/assets/images/game_cover_cyberpunk_1793913136041.jpg': gameCover,
+};
 
 export const INITIAL_MEDIA_ITEMS: MediaItem[] = [
   {
@@ -6,7 +25,7 @@ export const INITIAL_MEDIA_ITEMS: MediaItem[] = [
     title: 'The Waves Between Us',
     creator: 'Eleanor Vance',
     type: 'book',
-    coverImage: '/src/assets/images/book_cover_tomorrow_1793913134412.jpg',
+    coverImage: bookCover,
     releaseYear: 2024,
     genres: ['Literary Fiction', 'Coming of Age', 'Art & Friendship'],
     status: 'in_progress',
@@ -28,7 +47,7 @@ export const INITIAL_MEDIA_ITEMS: MediaItem[] = [
     title: 'Eclipse of the Twin Moons',
     creator: 'Kairo Chen',
     type: 'movie',
-    coverImage: '/src/assets/images/movie_poster_scifi_1793913134968.jpg',
+    coverImage: movieCover,
     releaseYear: 2024,
     genres: ['Sci-Fi', 'Epic Adventure', 'Space Opera'],
     status: 'completed',
@@ -54,7 +73,7 @@ export const INITIAL_MEDIA_ITEMS: MediaItem[] = [
     title: 'Neon Edge: Forge Your Destiny',
     creator: 'Neon Pulse Studios',
     type: 'game',
-    coverImage: '/src/assets/images/game_cover_cyberpunk_1793913136041.jpg',
+    coverImage: gameCover,
     releaseYear: 2025,
     genres: ['Action RPG', 'Cyberpunk', 'Open World'],
     status: 'in_progress',
@@ -76,7 +95,7 @@ export const INITIAL_MEDIA_ITEMS: MediaItem[] = [
     title: 'Sonic Fluidity',
     creator: 'Echo & The Drift',
     type: 'music',
-    coverImage: '/src/assets/images/album_art_vinyl_1793913135801.jpg',
+    coverImage: albumCover,
     releaseYear: 2024,
     genres: ['Indie Electronic', 'Ambient', 'Neo-Psychedelia'],
     status: 'in_progress',

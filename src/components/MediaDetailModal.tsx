@@ -86,14 +86,23 @@ export const MediaDetailModal: React.FC = () => {
         <div className="p-4 sm:p-6 overflow-y-auto space-y-6 flex-1">
           {/* Main Media Showcase Header */}
           <div className="flex flex-col sm:flex-row gap-5 items-start">
-            <div className="w-28 sm:w-36 h-40 sm:h-52 rounded-xl overflow-hidden bg-neutral-950 border border-neutral-800 shrink-0 shadow-lg relative mx-auto sm:mx-0">
+            <div className="w-28 sm:w-36 h-40 sm:h-52 rounded-xl overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-950 border border-neutral-800 shrink-0 shadow-lg relative mx-auto sm:mx-0 flex items-center justify-center">
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center select-none">
+                <MediaIcon type={item.type} className="w-8 h-8 text-amber-400/80 mb-2" />
+                <span className="text-xs text-neutral-300 font-semibold line-clamp-2 leading-tight">
+                  {item.title}
+                </span>
+              </div>
               <img
                 src={item.coverImage}
                 alt={item.title}
-                className="w-full h-full object-cover"
+                className="absolute inset-0 w-full h-full object-cover"
                 referrerPolicy="no-referrer"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
               />
-              <div className="absolute top-2 left-2 bg-neutral-950/80 backdrop-blur-sm text-[10px] font-mono px-2 py-0.5 rounded text-neutral-200 border border-neutral-800">
+              <div className="absolute top-2 left-2 bg-neutral-950/80 backdrop-blur-sm text-[10px] font-mono px-2 py-0.5 rounded text-neutral-200 border border-neutral-800 z-10">
                 {item.releaseYear || '2024'}
               </div>
             </div>

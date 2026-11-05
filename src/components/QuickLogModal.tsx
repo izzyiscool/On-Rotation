@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useRotation } from '../context/RotationContext';
 import { MediaType, MediaStatus, MediaItem } from '../types/media';
 import { MEDIA_TYPE_CONFIG } from '../utils/mediaUtils';
+import { LOCAL_IMAGE_MAP } from '../data/initialData';
 import { MediaIcon } from './MediaIcon';
 import { X, Star, Plus, Check } from 'lucide-react';
 
@@ -50,10 +51,10 @@ export const QuickLogModal: React.FC = () => {
 
     // Pick a clean curated artwork URL based on type
     const fallbackCovers: Record<MediaType, string> = {
-      book: '/src/assets/images/book_cover_tomorrow_1793913134412.jpg',
-      movie: '/src/assets/images/movie_poster_scifi_1793913134968.jpg',
-      music: '/src/assets/images/album_art_vinyl_1793913135801.jpg',
-      game: '/src/assets/images/game_cover_cyberpunk_1793913136041.jpg',
+      book: LOCAL_IMAGE_MAP['The Waves Between Us'],
+      movie: LOCAL_IMAGE_MAP['Eclipse of the Twin Moons'],
+      music: LOCAL_IMAGE_MAP['Sonic Fluidity'],
+      game: LOCAL_IMAGE_MAP['Neon Edge: Forge Your Destiny'],
       tv: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80',
       podcast: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=600&q=80',
     };

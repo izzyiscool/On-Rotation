@@ -236,12 +236,18 @@ export const SocialFeed: React.FC = () => {
                   onClick={() => setSelectedMediaModal(item)}
                   className="flex items-center gap-3 cursor-pointer min-w-0"
                 >
-                  <div className="w-12 h-16 rounded-lg overflow-hidden bg-neutral-900 shrink-0 border border-neutral-800">
+                  <div className="w-12 h-16 rounded-lg overflow-hidden bg-neutral-900 shrink-0 border border-neutral-800 relative flex items-center justify-center">
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <MediaIcon type={item.type} className="w-4 h-4 text-amber-400/80" />
+                    </div>
                     <img
                       src={item.coverImage}
                       alt={item.title}
-                      className="w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover"
                       referrerPolicy="no-referrer"
+                      onError={(e) => {
+                        e.currentTarget.style.display = 'none';
+                      }}
                     />
                   </div>
                   <div className="min-w-0">

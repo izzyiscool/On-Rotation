@@ -14,7 +14,22 @@ import {
   INITIAL_SOCIAL_FEED,
   INITIAL_GOALS,
   INITIAL_SHELVES,
+  LOCAL_IMAGE_MAP,
 } from '../data/initialData';
+
+export const resolveCoverImage = (item: { title?: string; coverImage?: string }): string => {
+  if (!item || !item.coverImage) return '';
+  if (item.title && LOCAL_IMAGE_MAP[item.title]) {
+    return LOCAL_IMAGE_MAP[item.title];
+  }
+  if (LOCAL_IMAGE_MAP[item.coverImage]) {
+    return LOCAL_IMAGE_MAP[item.coverImage];
+  }
+  if (item.coverImage.startsWith('/src/assets/images/')) {
+    return item.coverImage.replace('/src/', '/');
+  }
+  return item.coverImage;
+};
 
 export type MainTab = 'rotation' | 'library' | 'feed' | 'stats' | 'shelves' | 'discover';
 
@@ -75,7 +90,12 @@ export const RotationProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [mediaItems, setMediaItems] = useState<MediaItem[]>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.MEDIA);
-      return saved ? JSON.parse(saved) : INITIAL_MEDIA_ITEMS;
+      if (!saved) return INITIAL_MEDIA_ITEMS;
+      const parsed: MediaItem[] = JSON.parse(saved);
+      return parsed.map(item => ({
+        ...item,
+        coverImage: resolveCoverImage(item),
+      }));
     } catch {
       return INITIAL_MEDIA_ITEMS;
     }
@@ -84,7 +104,15 @@ export const RotationProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [socialFeed, setSocialFeed] = useState<SocialActivity[]>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.FEED);
-      return saved ? JSON.parse(saved) : INITIAL_SOCIAL_FEED;
+      if (!saved) return INITIAL_SOCIAL_FEED;
+      const parsed: SocialActivity[] = JSON.parse(saved);
+      return parsed.map(act => ({
+        ...act,
+        mediaItem: {
+          ...act.mediaItem,
+          coverImage: resolveCoverImage(act.mediaItem),
+        },
+      }));
     } catch {
       return INITIAL_SOCIAL_FEED;
     }
@@ -93,7 +121,19 @@ export const RotationProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [friends, setFriends] = useState<FriendProfile[]>(() => {
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEYS.FRIENDS);
-      return saved ? JSON.parse(saved) : INITIAL_FRIENDS;
+      if (!saved) return INITIAL_FRIENDS;
+      const parsed: FriendProfile[] = JSON.parse(saved);
+      return parsed.map(f => ({
+        ...f,
+        currentlyRotating: f.currentlyRotating.map(item => ({
+          ...item,
+          coverImage: resolveCoverImage(item),
+        })),
+        topFourFavorites: f.topFourFavorites.map(item => ({
+          ...item,
+          coverImage: resolveCoverImage(item),
+        })),
+      }));
     } catch {
       return INITIAL_FRIENDS;
     }

@@ -125,14 +125,20 @@ export const FriendProfileModal: React.FC = () => {
                     key={item.id}
                     className="group relative bg-neutral-950 rounded-xl overflow-hidden border border-neutral-800 flex flex-col justify-between"
                   >
-                    <div className="aspect-[3/4] w-full relative">
+                    <div className="aspect-[3/4] w-full relative bg-neutral-900 flex items-center justify-center overflow-hidden">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <MediaIcon type={item.type} className="w-5 h-5 text-amber-400/80" />
+                      </div>
                       <img
                         src={item.coverImage}
                         alt={item.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform"
                         referrerPolicy="no-referrer"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none';
+                        }}
                       />
-                      <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-neutral-950/80 backdrop-blur-sm text-[10px] text-neutral-200 border border-neutral-800 flex items-center gap-1">
+                      <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded bg-neutral-950/80 backdrop-blur-sm text-[10px] text-neutral-200 border border-neutral-800 flex items-center gap-1 z-10">
                         <MediaIcon type={item.type} className="w-2.5 h-2.5 text-amber-400" />
                         <span>{config.singular}</span>
                       </div>
@@ -175,12 +181,20 @@ export const FriendProfileModal: React.FC = () => {
                     className="p-3 rounded-xl bg-neutral-950 border border-neutral-800 flex items-center justify-between gap-3"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <img
-                        src={item.coverImage}
-                        alt={item.title}
-                        className="w-12 h-16 rounded-lg object-cover shrink-0 border border-neutral-800"
-                        referrerPolicy="no-referrer"
-                      />
+                      <div className="w-12 h-16 rounded-lg overflow-hidden bg-neutral-900 shrink-0 border border-neutral-800 relative flex items-center justify-center">
+                        <div className="absolute inset-0 flex items-center justify-center">
+                          <MediaIcon type={item.type} className="w-4 h-4 text-amber-400/80" />
+                        </div>
+                        <img
+                          src={item.coverImage}
+                          alt={item.title}
+                          className="absolute inset-0 w-full h-full object-cover"
+                          referrerPolicy="no-referrer"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      </div>
                       <div className="min-w-0">
                         <span className="text-[10px] text-neutral-400 flex items-center gap-1">
                           <MediaIcon type={item.type} className="w-3 h-3 text-amber-400" />

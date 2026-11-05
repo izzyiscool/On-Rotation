@@ -21,11 +21,22 @@ export const MediaCard: React.FC<MediaCardProps> = ({ item, onClick }) => {
     >
       <div>
         {/* Cover Artwork */}
-        <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-neutral-950 border border-neutral-800/80 mb-3 shadow-md group-hover:scale-[1.01] transition-transform">
+        <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-gradient-to-br from-neutral-800 to-neutral-950 border border-neutral-800/80 mb-3 shadow-md group-hover:scale-[1.01] transition-transform flex items-center justify-center">
+          {/* Underlying styled fallback */}
+          <div className="absolute inset-0 flex flex-col items-center justify-center p-3 text-center select-none">
+            <MediaIcon type={item.type} className="w-8 h-8 text-amber-400/80 mb-1.5" />
+            <span className="text-[11px] text-neutral-300 font-semibold line-clamp-2 leading-tight">
+              {item.title}
+            </span>
+            <span className="text-[10px] text-neutral-500 truncate mt-0.5">
+              {item.creator}
+            </span>
+          </div>
+
           <img
             src={item.coverImage}
             alt={item.title}
-            className="w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
             referrerPolicy="no-referrer"
             onError={(e) => {
               e.currentTarget.style.display = 'none';
