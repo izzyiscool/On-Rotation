@@ -1,0 +1,6 @@
+{
+  "name": "On Rotation",
+  "description": "All-in-one entertainment tracking and social networking app for books, TV shows, movies, music, podcasts, and video games.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
